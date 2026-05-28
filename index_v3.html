@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushar Viradiya | System Architect & AI Engineer</title>
+    <meta name="description" content="Portfolio of Tushar Viradiya: Python Backend Engineer, IoT & Data Systems, Aspiring AI/ML Professional.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        background: '#050505',
+                        surface: '#121212',
+                        surfaceBorder: '#262626',
+                        accent: '#00e5ff', /* Cyan/Neon Blue for AI/Tech vibe */
+                        textPrimary: '#f5f5f5',
+                        textSecondary: '#a3a3a3',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #f5f5f5;
+        }
+        
+        /* Subtle Dot Grid Background to represent Data/ML Nodes */
+        .bg-grid {
+            background-image: radial-gradient(#262626 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Glassmorphism for floating elements */
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(38, 38, 38, 0.8);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+        /* Blinking cursor for the terminal effect */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scroll reveal animation classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Connecting line for experience timeline */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 15px;
+            width: 2px;
+            background: linear-gradient(to bottom, #00e5ff, #262626 80%);
+        }
+    </style>
+</head>
+<body class="antialiased bg-grid relative overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-surfaceBorder transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-mono font-bold text-xl tracking-tighter text-white">
+                <span class="text-accent">&lt;</span>TV<span class="text-accent">/&gt;</span>
+            </a>
+            <div class="hidden md:flex space-x-8 font-mono text-sm">
+                <a href="#about" class="text-textSecondary hover:text-accent transition-colors">01.About</a>
+                <a href="#experience" class="text-textSecondary hover:text-accent transition-colors">02.Experience</a>
+                <a href="#projects" class="text-textSecondary hover:text-accent transition-colors">03.Projects</a>
+            </div>
+            <a href="mailto:tusharviradiya2@gmail.com" class="font-mono text-sm text-accent border border-accent px-4 py-2 rounded hover:bg-accent hover:text-background transition-all">
+                init_contact()
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 pt-32 pb-20">
+
+        <section class="min-h-[75vh] flex flex-col justify-center reveal active">
+            <div class="glass-panel rounded-lg overflow-hidden shadow-2xl shadow-accent/5 mb-8 border border-surfaceBorder max-w-3xl">
+                <div class="bg-[#1a1a1a] px-4 py-2 flex items-center border-b border-surfaceBorder">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="mx-auto font-mono text-xs text-textSecondary">guest@tushar-portfolio:~</div>
+                </div>
+                <div class="p-6 md:p-8 font-mono text-sm md:text-base leading-relaxed">
+                    <div class="text-accent mb-2">$ python profile.py</div>
+                    <div id="typewriter-text" class="text-textPrimary font-bold text-2xl md:text-4xl tracking-tight mb-4 min-h-[40px] md:min-h-[48px]">
+                        </div>
+                    <div class="text-textSecondary opacity-0 animate-[fadeIn_1s_ease-in_1.5s_forwards]">
+                        <p class="mb-2">&gt; Role: Python Backend Engineer &amp; Aspiring AI/ML Professional</p>
+                        <p class="mb-2">&gt; Location: Ahmedabad, Gujarat, India</p>
+                        <p>&gt; Status: Compiling M.Tech at BITS Pilani (AI &amp; ML)... <span class="text-green-400">[OK]</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-6 animate-[fadeIn_1s_ease-in_2s_forwards] opacity-0 text-2xl">
+                <a href="https://github.com/tusharviradiya" target="_blank" class="text-textSecondary hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/viradiyatushar" target="_blank" class="text-textSecondary hover:text-[#0077b5] transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:tusharviradiya2@gmail.com" class="text-textSecondary hover:text-accent transition-colors"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 reveal pt-24">
+            <h2 class="font-mono text-2xl md:text-3xl font-bold mb-8 text-white flex items-center">
+                <span class="text-accent mr-3">01.</span> System Summary
+                <div class="h-px bg-surfaceBorder flex-grow ml-6"></div>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="md:col-span-2 text-textSecondary text-lg leading-relaxed space-y-4">
+                    <p>
+                        I am an Associate Software Engineer with production experience building highly scalable Python/Django backends, real-time IoT data pipelines, and automated data extraction systems. 
+                    </p>
+                    <p>
+                        My foundation lies in asynchronous programming (Celery/Redis), time-series data processing, and PostgreSQL architecture. Currently, I am expanding my expertise into statistical computing and intelligent systems through an <strong class="text-textPrimary">M.Tech in AI & ML at BITS Pilani</strong>.
+                    </p>
+                    <p>
+                        Beyond traditional software, I am deeply passionate about applying technology to real-world physical systems. I am actively developing a proprietary IoT firmware and platform to monitor bovine welfare in Gaushalas—merging my interests in <strong>sustainable agriculture</strong> with advanced data pipelines and edge computing.
+                    </p>
+                </div>
+                
+                <div class="glass-panel p-6 rounded border-l-2 border-l-accent border-y-0 border-r-0 h-fit">
+                    <h3 class="font-mono text-white mb-4"><i class="fas fa-microchip mr-2 text-accent"></i> Core Infrastructure</h3>
+                    <ul class="font-mono text-sm space-y-2 text-textSecondary">
+                        <li><span class="text-accent">&gt;</span> Python / Django / DRF</li>
+                        <li><span class="text-accent">&gt;</span> Pandas / NumPy</li>
+                        <li><span class="text-accent">&gt;</span> PostgreSQL / Redis</li>
+                        <li><span class="text-accent">&gt;</span> Celery / Async Queues</li>
+                        <li><span class="text-accent">&gt;</span> MQTT / IoT Data Pipelines</li>
+                        <li><span class="text-accent">&gt;</span> AWS EC2 / Docker</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-16 reveal pt-24">
+            <h2 class="font-mono text-2xl md:text-3xl font-bold mb-12 text-white flex items-center">
+                <span class="text-accent mr-3">02.</span> Execution History
+                <div class="h-px bg-surfaceBorder flex-grow ml-6"></div>
+            </h2>
+            
+            <div class="relative timeline-line pl-10 space-y-12">
+                <div class="relative">
+                    <div class="absolute -left-[45px] top-1 w-4 h-4 rounded-full bg-background border-2 border-accent z-10 shadow-[0_0_10px_#00e5ff]"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white">Associate Software Engineer <span class="text-accent font-mono text-sm ml-2">@ Innvonix Tech Solutions</span></h3>
+                        <span class="font-mono text-sm text-textSecondary mt-1 md:mt-0">Feb 2024 – Present</span>
+                    </div>
+                    <ul class="list-none space-y-3 text-textSecondary mt-4">
+                        <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-accent font-light">
+                            Designed and maintained production-grade REST APIs using <strong class="text-textPrimary">Django REST Framework</strong>, serving real-time IoT sensor telemetry to cross-platform clients with sub-second latency.
+                        </li>
+                        <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-accent font-light">
+                            Architected <strong class="text-textPrimary">MQTT-based ingestion pipelines</strong> to continuously stream and process high-frequency time-series data from distributed hardware arrays.
+                        </li>
+                        <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-accent font-light">
+                            Engineered asynchronous task infrastructure using <strong class="text-textPrimary">Celery and Redis</strong> for background aggregations, threshold-based alerting, establishing workflows directly applicable to ML batch inference.
+                        </li>
+                        <li class="relative pl-6 before:content-['▹'] before:absolute before:left-0 before:text-accent font-light">
+                            Configured and secured production <strong class="text-textPrimary">AWS EC2</strong> environments utilizing Nginx and Gunicorn, managing complex PostgreSQL relational schemas and multi-tenant RBAC.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute -left-[45px] top-1 w-4 h-4 rounded-full bg-background border-2 border-surfaceBorder z-10"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white">M.Tech AI & ML <span class="text-textSecondary font-mono text-sm ml-2">@ BITS Pilani (WILP)</span></h3>
+                        <span class="font-mono text-sm text-textSecondary mt-1 md:mt-0">Present</span>
+                    </div>
+                    <p class="text-textSecondary font-light mt-2 pl-2">
+                        Formalizing statistical and mathematical foundations. Focusing on ML/DL, AI Systems Architecture, and Data Management to transition into an MLOps / AI Engineering role.
+                    </p>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute -left-[45px] top-1 w-4 h-4 rounded-full bg-background border-2 border-surfaceBorder z-10"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white">B.E. Information Technology <span class="text-textSecondary font-mono text-sm ml-2">@ Lukhdhirji Eng. College</span></h3>
+                        <span class="font-mono text-sm text-textSecondary mt-1 md:mt-0">2020 – 2024</span>
+                    </div>
+                    <p class="text-textSecondary font-light mt-2 pl-2 mb-2">
+                        CGPA: 7.62 / 10. Gold Medalist (Student of the Year). 
+                    </p>
+                    <p class="text-textSecondary font-light pl-2">
+                        <strong>NCC Under Officer:</strong> Held senior-most cadet rank for 2 years, commanding and mentoring a platoon of 55 cadets.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-16 reveal pt-24">
+            <h2 class="font-mono text-2xl md:text-3xl font-bold mb-8 text-white flex items-center">
+                <span class="text-accent mr-3">03.</span> Compiled Projects
+                <div class="h-px bg-surfaceBorder flex-grow ml-6"></div>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel p-8 rounded-lg hover:-translate-y-2 transition-transform duration-300 group flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fas fa-server text-3xl text-accent"></i>
+                        <span class="font-mono text-xs text-accent px-2 py-1 border border-accent/30 rounded bg-accent/10">Active</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">IoT Backend System – Compost Monitoring Platform</h3>
+                    <p class="text-textSecondary text-sm mb-6 flex-grow font-light leading-relaxed">
+                        Scaled a robust backend architecture to ingest and persist continuous data streams from distributed IoT devices. Built a statistical anomaly detection layer utilizing rule-based logic to flag biologically implausible sensor readings, serving as a precursor to ML anomaly detection.
+                    </p>
+                    <div class="font-mono text-xs text-textSecondary flex flex-wrap gap-3">
+                        <span>Python</span> <span>Django</span> <span>MQTT</span> <span>PostgreSQL</span> <span>Celery</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-lg hover:-translate-y-2 transition-transform duration-300 group flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fas fa-mobile-screen-button text-3xl text-accent"></i>
+                        <span class="font-mono text-xs text-textSecondary px-2 py-1 border border-surfaceBorder rounded bg-surface">Completed</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">Real-Time Monitoring Backend – Mobile App API</h3>
+                    <p class="text-textSecondary text-sm mb-6 flex-grow font-light leading-relaxed">
+                        Developed secure RESTful endpoints tailored for cross-platform mobile consumption, handling sensor data ingestion, statistical aggregations, and AI-ready recommendation stubs. Managed end-to-end cloud deployment on AWS EC2 reflecting standard industry MLOps practices.
+                    </p>
+                    <div class="font-mono text-xs text-textSecondary flex flex-wrap gap-3">
+                        <span>DRF</span> <span>AWS EC2</span> <span>Nginx</span> <span>Gunicorn</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-lg hover:-translate-y-2 transition-transform duration-300 group flex flex-col md:col-span-2">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fas fa-database text-3xl text-accent"></i>
+                        <a href="https://github.com/tusharviradiya" target="_blank" class="text-textSecondary hover:text-white"><i class="fab fa-github text-xl"></i></a>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">Automated Data Extraction & Price Tracking System</h3>
+                        <p class="text-textSecondary text-sm mb-6 font-light leading-relaxed">
+                            Engineered end-to-end ETL pipelines to scrape, parse, and persist structured product intelligence. Architected normalized database schemas to track historical pricing fluctuations, enabling trend analysis and establishing high-fidelity datasets critical for predictive modeling and ML training.
+                        </p>
+                        <div class="font-mono text-xs text-textSecondary flex flex-wrap gap-3">
+                            <span>BeautifulSoup</span> <span>Scrapy</span> <span>PostgreSQL</span> <span>Playwright</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-20 py-8 border-t border-surfaceBorder text-center reveal">
+            <p class="font-mono text-sm text-textSecondary">
+                Designed & Built by Tushar Viradiya <br>
+                <span class="text-xs mt-2 inline-block opacity-50">System.exit(0)</span>
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Typing Effect for Hero Section
+        const textToType = "Tushar Viradiya";
+        const typeContainer = document.getElementById('typewriter-text');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                typeContainer.innerHTML += textToType.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            } else {
+                typeContainer.innerHTML += '<span class="cursor-blink font-normal">_</span>';
+            }
+        }
+        
+        // Start typing slightly after page load
+        setTimeout(typeWriter, 500);
+
+        // 2. Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => {
+            // Don't animate the hero section on scroll, it plays immediately
+            if (!el.classList.contains('active')) {
+                revealObserver.observe(el);
+            }
+        });
+    </script>
+</body>
+</html>

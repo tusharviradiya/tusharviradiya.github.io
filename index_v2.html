@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushar Viradiya | Linux Terminal Portfolio</title>
+    <meta name="description" content="Interactive Linux terminal portfolio of Tushar Viradiya: Python Backend Engineer & AI/ML Professional.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        termBg: '#0d1117',
+                        termHeader: '#161b22',
+                        promptUser: '#4ade80', /* Green */
+                        promptHost: '#60a5fa', /* Blue */
+                        promptPath: '#c084fc', /* Purple */
+                        textMain: '#c9d1d9',
+                        textMuted: '#8b949e',
+                        error: '#f85149',
+                        fileTxt: '#c9d1d9',
+                        fileJson: '#f1e05a',
+                        fileMd: '#58a6ff',
+                        fileSh: '#4ade80'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #010409;
+            color: #c9d1d9;
+            font-family: 'JetBrains Mono', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .terminal-window {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(96, 165, 250, 0.1);
+            border: 1px solid #30363d;
+        }
+
+        #terminal-body::-webkit-scrollbar { width: 8px; }
+        #terminal-body::-webkit-scrollbar-track { background: #0d1117; }
+        #terminal-body::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+        #terminal-body::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
+
+        input:focus { outline: none; }
+        
+        .output-line { animation: fadeIn 0.2s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Syntax Highlighting */
+        .hl-json-key { color: #79c0ff; }
+        .hl-json-str { color: #a5d6ff; }
+        .hl-json-bracket { color: #e6edf3; }
+        .hl-md-h1 { color: #58a6ff; font-weight: bold; }
+        .hl-md-li { color: #d2a8ff; }
+        .hl-sh-cmd { color: #ff7b72; font-weight: bold; }
+        .hl-comment { color: #8b949e; font-style: italic; }
+    </style>
+</head>
+<body class="p-2 md:p-6 lg:p-10">
+
+    <main class="h-full w-full max-w-6xl mx-auto flex flex-col terminal-window rounded-xl overflow-hidden bg-termBg">
+        
+        <!-- macOS / Linux Window Controls -->
+        <div class="flex-shrink-0 bg-termHeader px-4 py-3 flex items-center border-b border-[#30363d]">
+            <div class="flex space-x-2">
+                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+            </div>
+            <div class="mx-auto text-xs text-textMuted font-semibold tracking-wider select-none flex items-center">
+                <i class="fab fa-linux mr-2"></i> guest@tushar-server: ~
+            </div>
+            <div class="w-16"></div> <!-- Spacer for centering -->
+        </div>
+
+        <!-- Terminal Output -->
+        <div id="terminal-body" class="flex-grow p-4 md:p-6 overflow-y-auto text-sm md:text-base leading-relaxed">
+            
+            <div class="mb-6">
+                <pre class="text-promptHost font-bold text-xs md:text-sm leading-tight mb-4 select-none">
+  _____         _                  __      ___               _ _             
+ |_   _|  _ ___| |__   __ _ _ __   \ \    / (_)______ _  __| (_)_  _  __ _ 
+   | | | | / __| '_ \ / _` | '__|   \ \  / /| | '__/ _` |/ _` | | | | |/ _` |
+   | | |_| \__ \ | | | (_| | |       \ \/ / | | | | (_| | (_| | | |_| | (_| |
+   |_|  \__,_|___/_| |_|\__,_|_|      \__/  |_|_|  \__,_|\__,_|_|\__, |\__,_|
+                                                                    __/ |    
+                                                                   |___/     
+                </pre>
+                <p class="hl-comment"># Tushar Viradiya OS v2.0.4 (Linux 5.15.0-generic x86_64)</p>
+                <p class="hl-comment"># System: Python Backend | AI/ML | IoT Data Pipelines</p>
+                <p class="mt-2 text-textMain">Welcome to my interactive portfolio.</p>
+                <p class="mt-1">Type <span class="text-promptUser font-bold">help</span> to see available commands.</p>
+            </div>
+            
+            <div id="history"></div>
+            
+            <!-- Input Area -->
+            <div class="flex items-center mt-2 pb-4">
+                <div class="flex-shrink-0 mr-2 select-none" id="prompt-element">
+                    <span class="text-promptUser font-bold">guest</span><span class="text-textMain">@</span><span class="text-promptHost font-bold">tushar-server</span><span class="text-textMain">:</span><span class="text-promptPath font-bold">~</span><span class="text-textMain">$</span>
+                </div>
+                <input type="text" id="cmd-input" class="bg-transparent border-none text-textMain flex-grow caret-textMain h-8" autocomplete="off" spellcheck="false" autofocus>
+            </div>
+        </div>
+
+        <!-- Quick Commands Toolbar (Now a flex item, not absolutely positioned) -->
+        <div class="flex-shrink-0 w-full bg-termHeader border-t border-[#30363d] p-3 shadow-[0_-10px_20px_rgba(0,0,0,0.5)] z-10 relative">
+            <div class="text-xs text-textMuted mb-2 pl-1 font-semibold tracking-wide uppercase">Quick Exec:</div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="execCmd('ls')" class="px-3 py-1.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded text-xs text-textMain transition-colors">ls</button>
+                <button onclick="execCmd('cat about.txt')" class="px-3 py-1.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded text-xs text-fileTxt transition-colors">cat about.txt</button>
+                <button onclick="execCmd('cat skills.json')" class="px-3 py-1.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded text-xs text-fileJson transition-colors">cat skills.json</button>
+                <button onclick="execCmd('cat experience.log')" class="px-3 py-1.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded text-xs text-textMuted transition-colors">cat experience.log</button>
+                <button onclick="execCmd('cat projects.md')" class="px-3 py-1.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded text-xs text-fileMd transition-colors">cat projects.md</button>
+                <button onclick="execCmd('cat contact.sh')" class="px-3 py-1.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded text-xs text-fileSh transition-colors">cat contact.sh</button>
+                <button onclick="execCmd('clear')" class="px-3 py-1.5 bg-[#21262d] hover:bg-error/20 border border-[#30363d] rounded text-xs text-error transition-colors ml-auto"><i class="fas fa-trash-alt mr-1"></i> clear</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const input = document.getElementById('cmd-input');
+        const history = document.getElementById('history');
+        const terminalBody = document.getElementById('terminal-body');
+
+        // Virtual File System Data
+        const fileSystem = {
+            'about.txt': {
+                type: 'text',
+                content: `TUSHAR VIRADIYA
+==================================================
+Python Backend Engineer | Aspiring AI/ML Professional
+
+I am an Associate Software Engineer with 2+ years of production experience 
+building highly scalable Python/Django backends, real-time IoT data pipelines, 
+and automated data extraction systems.
+
+My engineering foundation relies heavily on asynchronous programming (Celery/Redis), 
+time-series data processing, and PostgreSQL architecture. These are the core 
+infrastructure pillars of applied machine learning.
+
+Currently, I am pursuing an M.Tech in AI & ML at BITS Pilani to transition 
+into AI systems architecture, LLM applications, and MLOps roles.`
+            },
+            'skills.json': {
+                type: 'json',
+                content: `{
+  <span class="hl-json-key">"languages"</span>: [<span class="hl-json-str">"Python (Advanced)"</span>, <span class="hl-json-str">"JavaScript"</span>, <span class="hl-json-str">"Rust"</span>, <span class="hl-json-str">"SQL"</span>],
+  <span class="hl-json-key">"backend_api"</span>: [<span class="hl-json-str">"Django"</span>, <span class="hl-json-str">"Django REST Framework"</span>, <span class="hl-json-str">"Celery"</span>, <span class="hl-json-str">"FastAPI"</span>],
+  <span class="hl-json-key">"data_ml"</span>: [<span class="hl-json-str">"Pandas"</span>, <span class="hl-json-str">"NumPy"</span>, <span class="hl-json-str">"Time-series Analytics"</span>, <span class="hl-json-str">"Statistical Methods"</span>],
+  <span class="hl-json-key">"iot_messaging"</span>: [<span class="hl-json-str">"MQTT"</span>, <span class="hl-json-str">"ESP32/STM32 OTA"</span>, <span class="hl-json-str">"Real-time Data Pipelines"</span>],
+  <span class="hl-json-key">"devops_cloud"</span>: [<span class="hl-json-str">"Docker"</span>, <span class="hl-json-str">"AWS EC2"</span>, <span class="hl-json-str">"Nginx"</span>, <span class="hl-json-str">"Linux"</span>],
+  <span class="hl-json-key">"databases"</span>: [<span class="hl-json-str">"PostgreSQL"</span>, <span class="hl-json-str">"Redis"</span>]
+}`
+            },
+            'experience.log': {
+                type: 'log',
+                content: `[INFO] Loading work history...
+[TIME: Feb 2024 - Present]
+[ROLE: Associate Software Engineer]
+[ORG:  Innvonix Tech Solutions | Ahmedabad, Gujarat]
+
+> Designed production-grade REST APIs (Django REST Framework) for real-time IoT sensor data.
+> Architected MQTT-based ingestion pipelines for continuous time-series telemetry.
+> Built async task infra with Celery/Redis for background aggregations and threshold alerting.
+> Implemented data correction algorithms to secure time-series data integrity.
+> Engineered Over-The-Air (OTA) firmware update workflows for ESP32/STM32 via MQTT.
+> Managed AWS EC2 backend deployments (Nginx/Gunicorn) and complex PostgreSQL schemas.
+[EOF]`
+            },
+            'projects.md': {
+                type: 'markdown',
+                content: `<span class="hl-md-h1"># 1. IoT Backend System – Compost Monitoring Platform [Active]</span>
+<span class="hl-md-li">- Tech Stack:</span> Python, Django, DRF, PostgreSQL, MQTT, Celery, AWS EC2, Docker
+<span class="hl-md-li">- Details:</span> Scaled backend to ingest continuous sensor streams. Built statistical anomaly detection layers (a precursor to ML anomaly detection) and automated aggregation jobs.
+
+<span class="hl-md-h1"># 2. Bovine Welfare IoT Monitor [Prototype]</span>
+<span class="hl-md-li">- Tech Stack:</span> Python, IoT, Edge Computing, Time-Series
+<span class="hl-md-li">- Details:</span> Proprietary end-to-end hardware and backend platform developed for a Gaushala. Aggregates time-series health data to track and calculate cow welfare metrics for future ML analytics.
+
+<span class="hl-md-h1"># 3. Automated Data Extraction & Price Tracking System</span>
+<span class="hl-md-li">- Tech Stack:</span> BeautifulSoup, Scrapy, PostgreSQL, Playwright
+<span class="hl-md-li">- Details:</span> End-to-end ETL pipelines for e-commerce data. Designed normalized DB schemas to track historical pricing, ensuring data quality for clean ML training datasets.`
+            },
+            'education.txt': {
+                type: 'text',
+                content: `EDUCATION
+--------------------------------------------------
+[Present]     M.Tech - Artificial Intelligence & Machine Learning
+              BITS Pilani (WILP)
+              Focus: AI Systems Architecture, MLOps, LLMs, Stats.
+
+[2020 - 2024] B.E. - Information Technology
+              Lukhdhirji Engineering College (GTU Affiliated)
+              CGPA: 7.62 / 10 | Gold Medalist (Student of the Year)
+              Leadership: NCC Under Officer (Commanded 55 cadets)`
+            },
+            'contact.sh': {
+                type: 'bash',
+                content: `<span class="hl-comment">#!/bin/bash</span>
+<span class="hl-sh-cmd">echo</span> "Initiating contact sequence..."
+
+<span class="hl-sh-cmd">export</span> EMAIL="<a href='mailto:tusharviradiya2@gmail.com' class='text-promptHost hover:underline'>tusharviradiya2@gmail.com</a>"
+<span class="hl-sh-cmd">export</span> PHONE="+91 9904974866"
+<span class="hl-sh-cmd">export</span> LINKEDIN="<a href='https://linkedin.com/in/viradiyatushar' target='_blank' class='text-promptHost hover:underline'>linkedin.com/in/viradiyatushar</a>"
+<span class="hl-sh-cmd">export</span> GITHUB="<a href='https://github.com/tusharviradiya' target='_blank' class='text-promptHost hover:underline'>github.com/tusharviradiya</a>"
+
+<span class="hl-sh-cmd">echo</span> "Reach out for opportunities in Backend Engineering or AI/ML."`
+            },
+            'tushar_resume.docx': {
+                type: 'binary',
+                content: `<span class="text-error">cat: tushar_resume.docx: binary file cannot be displayed.</span>
+Please use the download command or click <a href="tushar_resume.docx" target="_blank" class="text-promptUser font-bold underline bg-promptUser/10 px-2 py-1 rounded">Here</a> to download the file.`
+            }
+        };
+
+        // System Commands Map
+        const systemCommands = {
+            'help': `<div class="mb-2">Available commands:</div>
+<table class="w-full max-w-md text-left">
+    <tr><td class="text-promptUser font-bold w-24">ls</td><td>List directory contents</td></tr>
+    <tr><td class="text-promptUser font-bold">cat</td><td>Concatenate and print files (e.g., 'cat about.txt')</td></tr>
+    <tr><td class="text-promptUser font-bold">pwd</td><td>Print working directory</td></tr>
+    <tr><td class="text-promptUser font-bold">whoami</td><td>Print effective user id</td></tr>
+    <tr><td class="text-promptUser font-bold">date</td><td>Print the system date and time</td></tr>
+    <tr><td class="text-promptUser font-bold">clear</td><td>Clear the terminal screen</td></tr>
+</table>`,
+            
+            'pwd': `/home/guest`,
+            
+            'whoami': `guest`,
+            
+            'date': () => new Date().toString(),
+            
+            'sudo': `<span class="text-error">guest is not in the sudoers file. This incident will be reported.</span>`
+        };
+        
+        const allCommandsList = ['ls', 'cat', 'pwd', 'whoami', 'date', 'clear', 'sudo', 'help'];
+
+        // KEYBOARD EVENT LISTENER (Handles 'Enter' and 'Tab')
+        input.addEventListener('keydown', function(e) {
+            
+            // --- TAB AUTO-COMPLETE LOGIC ---
+            if (e.key === 'Tab') {
+                e.preventDefault(); // Prevent browser from shifting focus
+                const currentVal = input.value;
+                const args = currentVal.split(/\s+/);
+                
+                // Complete Command (e.g. typing "wh" + Tab -> "whoami")
+                if (args.length === 1) {
+                    const partialCmd = args[0].toLowerCase();
+                    const matches = allCommandsList.filter(cmd => cmd.startsWith(partialCmd));
+                    
+                    if (matches.length === 1) {
+                        input.value = matches[0] + ' ';
+                    } else if (matches.length > 1 && partialCmd.length > 0) {
+                        echoPrompt(currentVal);
+                        printOutput(matches.join('   '));
+                    }
+                } 
+                // Complete File Name (e.g. typing "cat ab" + Tab -> "cat about.txt")
+                else if (args.length === 2 && (args[0] === 'cat' || args[0] === 'ls')) {
+                    const partialFile = args[1];
+                    const files = Object.keys(fileSystem);
+                    const matches = files.filter(f => f.startsWith(partialFile));
+                    
+                    if (matches.length === 1) {
+                        input.value = args[0] + ' ' + matches[0];
+                    } else if (matches.length > 1 && partialFile.length > 0) {
+                        echoPrompt(currentVal);
+                        printOutput(matches.join('   '));
+                    }
+                }
+            } 
+            
+            // --- ENTER EXECUTE LOGIC ---
+            else if (e.key === 'Enter') {
+                const commandString = input.value.trim();
+                if (commandString) {
+                    processCommand(commandString);
+                } else {
+                    echoPrompt("");
+                    input.value = '';
+                    scrollToBottom();
+                }
+            }
+        });
+
+        // Always keep input focused
+        terminalBody.addEventListener('click', () => {
+            input.focus();
+        });
+
+        // Exec from buttons
+        function execCmd(cmd) {
+            input.value = cmd;
+            processCommand(cmd);
+        }
+
+        // Echo prompt to screen
+        function echoPrompt(cmd) {
+            const cmdEcho = document.createElement('div');
+            cmdEcho.className = 'mt-2 mb-1 text-textMain break-words';
+            cmdEcho.innerHTML = `<span class="text-promptUser font-bold">guest</span>@<span class="text-promptHost font-bold">tushar-server</span>:<span class="text-promptPath font-bold">~</span>$ ${cmd}`;
+            history.appendChild(cmdEcho);
+        }
+
+        // Print raw output to screen
+        function printOutput(htmlString) {
+            const output = document.createElement('div');
+            output.className = 'output-line mb-3 whitespace-pre-wrap font-mono';
+            output.innerHTML = htmlString;
+            history.appendChild(output);
+            scrollToBottom();
+        }
+
+        // Delay scroll slightly to ensure DOM has rendered appended elements
+        function scrollToBottom() {
+            setTimeout(() => {
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }, 10);
+        }
+
+        // Command Processor Engine
+        function processCommand(cmdString) {
+            echoPrompt(cmdString);
+            
+            const args = cmdString.split(/\s+/);
+            const cmd = args[0].toLowerCase();
+
+            if (cmd === 'clear') {
+                history.innerHTML = '';
+            } 
+            else if (cmd === 'ls') {
+                const files = Object.keys(fileSystem);
+                let lsOutput = '<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-1">';
+                files.forEach(file => {
+                    let colorClass = 'text-fileTxt';
+                    if (file.endsWith('.json')) colorClass = 'text-fileJson font-semibold';
+                    else if (file.endsWith('.md')) colorClass = 'text-fileMd font-semibold';
+                    else if (file.endsWith('.sh')) colorClass = 'text-fileSh font-bold';
+                    else if (file.endsWith('.docx')) colorClass = 'text-promptPath underline';
+                    lsOutput += `<div class="${colorClass}">${file}</div>`;
+                });
+                lsOutput += '</div>';
+                printOutput(lsOutput);
+            }
+            else if (cmd === 'cat') {
+                if (args.length < 2) {
+                    printOutput(`cat: missing operand\nTry 'ls' to see available files, then 'cat <filename>'`);
+                } else {
+                    const filename = args[1];
+                    if (fileSystem[filename]) {
+                        printOutput(fileSystem[filename].content);
+                    } else {
+                        printOutput(`cat: ${filename}: No such file or directory`);
+                    }
+                }
+            }
+            else if (systemCommands[cmd]) {
+                const response = typeof systemCommands[cmd] === 'function' ? systemCommands[cmd]() : systemCommands[cmd];
+                printOutput(response);
+            }
+            else if (cmd === 'cd') {
+                if (args.length > 1) {
+                    printOutput(`bash: cd: ${args[1]}: Permission denied (guest account)`);
+                }
+            }
+            else {
+                printOutput(`bash: ${cmd}: command not found. Type 'help' for available commands.`);
+            }
+
+            input.value = '';
+            scrollToBottom();
+            input.focus();
+        }
+    </script>
+</body>
+</html>
